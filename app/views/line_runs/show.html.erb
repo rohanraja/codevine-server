@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Lineno:</strong>
+  <%= @line_run.lineNo %>
+</p>
+
+<p>
+  <strong>Timestamp:</strong>
+  <%= @line_run.timeStamp %>
+</p>
+
+<p>
+  <strong>Method run:</strong>
+  <%= @line_run.method_run_id %>
+</p>
+
+<%= link_to 'Edit', edit_line_run_path(@line_run) %> |
+<%= link_to 'Back', line_runs_path %>

@@ -1,0 +1,22 @@
+<%= form_with(model: method_run, local: true) do |form| %>
+  <% if method_run.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(method_run.errors.count, "error") %> prohibited this method_run from being saved:</h2>
+
+      <ul>
+      <% method_run.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :mrid %>
+    <%= form.text_field :mrid, id: :method_run_mrid %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

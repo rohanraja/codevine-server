@@ -1,0 +1,32 @@
+<%= form_with(model: line_run, local: true) do |form| %>
+  <% if line_run.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(line_run.errors.count, "error") %> prohibited this line_run from being saved:</h2>
+
+      <ul>
+      <% line_run.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :lineNo %>
+    <%= form.number_field :lineNo, id: :line_run_lineNo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :timeStamp %>
+    <%= form.datetime_select :timeStamp, id: :line_run_timeStamp %>
+  </div>
+
+  <div class="field">
+    <%= form.label :method_run_id %>
+    <%= form.number_field :method_run_id, id: :line_run_method_run_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

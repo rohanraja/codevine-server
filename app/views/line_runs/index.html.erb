@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Line Runs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Lineno</th>
+      <th>Timestamp</th>
+      <th>Method run</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @line_runs.each do |line_run| %>
+      <tr>
+        <td><%= line_run.lineNo %></td>
+        <td><%= line_run.timeStamp %></td>
+        <td><%= line_run.method_run_id %></td>
+        <td><%= link_to 'Show', line_run %></td>
+        <td><%= link_to 'Edit', edit_line_run_path(line_run) %></td>
+        <td><%= link_to 'Destroy', line_run, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Line Run', new_line_run_path %>

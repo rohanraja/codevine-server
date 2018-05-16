@@ -1,0 +1,2 @@
+class LineRun < ApplicationRecord
+end
