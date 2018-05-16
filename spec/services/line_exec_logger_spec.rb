@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CodeEventsWriterService do
 
-  subject { CodeEventsWriterService.new }
+  subject { CodeEventsWriterService }
 
   describe 'LineExecEvent' do
 

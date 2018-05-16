@@ -3,7 +3,17 @@ class CodeEventsWriterService
 
   end
 
-  def WriteLineExec(methodRunId, lineNo, timeStamp)
+
+  def self.HandleLineExec(crid, payload)
+    mrid = payload["Mrid"]
+    lineNo = payload["LineNo"]
+    timeS = payload["TimeStamp"]
+
+    CodeEventsWriterService.WriteLineExec(mrid, lineNo, timeS)
+
+  end
+
+  def self.WriteLineExec(methodRunId, lineNo, timeStamp)
 
     parsedTime = Time.parse(timeStamp)
     l = LineRun.create(:lineNo => lineNo, :timeStamp => parsedTime )
