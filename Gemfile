@@ -54,3 +54,6 @@ gem 'rspec-rails'
 
 gem 'redis'
 gem 'redis-namespace'
+
+gem 'resque'
+
