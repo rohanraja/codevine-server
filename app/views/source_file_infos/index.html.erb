@@ -1,0 +1,33 @@
+<div class="page-header">
+  <%= link_to new_source_file_info_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Source file info
+  <% end %>
+  <h1>Listing source_file_infos</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>Source code info</th>
+            <th>Code</th>
+            <th>Relativepath</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @source_file_infos) do |source_file_info| %>
+            <td><%= source_file_info.source_code_info_id %></td>
+            <td><%= source_file_info.code %></td>
+            <td><%= source_file_info.relativePath %></td>
+            <td><%= link_to 'Show', source_file_info %></td>
+        <td><%= link_to 'Edit', edit_source_file_info_path(source_file_info) %></td>
+        <td><%= link_to 'Destroy', source_file_info, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>

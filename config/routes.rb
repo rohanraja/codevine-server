@@ -1,6 +1,7 @@
 require 'resque/server'
 
 Rails.application.routes.draw do
+  resources :source_file_infos
   get 'api/codefiles'
 
   get 'api/fileruns'

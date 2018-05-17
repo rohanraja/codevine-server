@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180517144443) do
+ActiveRecord::Schema.define(version: 20180517231126) do
 
   create_table "line_runs", force: :cascade do |t|
     t.integer "lineNo"
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(version: 20180517144443) do
     t.string "mrid"
     t.string "relativeFilePath"
     t.string "methodName"
+    t.integer "source_file_info_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "source_file_infos", force: :cascade do |t|
+    t.integer "source_code_info_id"
+    t.string "code"
+    t.string "relativePath"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -10,10 +10,13 @@ class ApiController < ApplicationController
   end
 
   def fileruns
-    render :json => [
-      ["f1", 0],
-      ["f1", 1],
-      ["f1", 2],
-    ]
+    ds = DataSelectorService.new
+    cf = ds.getFileRuns
+    render :json => cf
+    # render :json => [
+    #   ["f1", 0],
+    #   ["f1", 1],
+    #   ["f1", 2],
+    # ]
   end
 end
