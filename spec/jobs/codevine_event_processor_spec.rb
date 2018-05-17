@@ -42,6 +42,23 @@ RSpec.describe CodeRunEventProcessor do
 
     end
   end
+
+  describe 'Add SourceFile Message' do
+    it 'adds a new source file info' do
+      fpath = "test_class"
+      code = "test_code"
+
+      payload = [fpath, code]
+
+      subject.perform("test_clr_id", "ADD_SOURCE_FILE", payload.to_json)
+      
+      m = SourceFileInfo.last
+
+      expect(m.relativePath).to eq(fpath)
+      expect(m.code).to eq(code)
+
+    end
+  end
 end
 
 

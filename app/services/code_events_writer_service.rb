@@ -15,4 +15,9 @@ class CodeEventsWriterService
     m = MethodRun.create(:mrid => methodRunId, :relativeFilePath => fPath , :methodName => methodName)
   end
 
+  def self.ADD_SOURCE_FILE(fPath, code)
+
+    s = SourceFileInfo.create(:relativePath => fPath, :code => code)
+  end
+
 end
