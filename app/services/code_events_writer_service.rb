@@ -1,13 +1,13 @@
 class CodeEventsWriterService
-  def initialize
-
-  end
-
 
   def self.HandleLineExec(crid, payload)
-    mrid = payload["Mrid"]
-    lineNo = payload["LineNo"]
-    timeS = payload["TimeStamp"]
+    # mrid = payload["Mrid"]
+    # lineNo = payload["LineNo"]
+    # timeS = payload["TimeStamp"]
+
+    mrid = payload[0]
+    lineNo = payload[1]
+    timeS = payload[2]
 
     CodeEventsWriterService.WriteLineExec(mrid, lineNo, timeS)
 

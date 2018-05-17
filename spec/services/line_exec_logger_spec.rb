@@ -9,7 +9,7 @@ RSpec.describe CodeEventsWriterService do
     it 'creates a LineRun object and links to MethodRun' do
       mrID = "test_id"
       lineNo = 6
-      timeStamp = Time.now.strftime("%d-%m-%Y")
+      timeStamp = Time.now.utc.strftime("%d-%m-%Y %z")
       mr = MethodRun.create(:mrid => mrID)
 
       subject.WriteLineExec(mrID, lineNo, timeStamp)
@@ -20,7 +20,7 @@ RSpec.describe CodeEventsWriterService do
       l = mr.line_runs.first
       expect(l.lineNo).to be(lineNo)
 
-      expect(l.timeStamp.day).to be(Time.now.utc.day)
+      expect(l.timeStamp.year).to be(Time.now.utc.year)
 
     end
 

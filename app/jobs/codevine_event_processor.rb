@@ -7,7 +7,6 @@ class CodeRunEventProcessor
     payload = JSON.parse(payload)
 
     if eventType == "LINE_EXEC"
-
       CodeEventsWriterService.HandleLineExec(codeRunId, payload)
     end
 
