@@ -5,7 +5,6 @@ RSpec.describe CodeRunEventProcessor do
   subject { CodeRunEventProcessor }
 
   describe 'LineExec Message' do
-
     it 'creates a LineRun object and links to MethodRun' do
       mrID = "test_id"
       lineNo = 6
@@ -23,9 +22,23 @@ RSpec.describe CodeRunEventProcessor do
       expect(l.lineNo).to be(lineNo)
 
       expect(l.timeStamp.year).to be(Time.now.utc.year)
+    end
+  end
+
+  describe 'MethodEnter Message' do
+    it 'creates a MethodRun and links to MethodRun' do
+      mrID = "test_id"
+      fpath = "test_class"
+
+      payload = [mrID, fpath, "test_method"]
+
+      subject.perform("test_clr_id", "METHOD_ENTER", payload.to_json)
+      
+      m = MethodRun.last
+      expect(m.mrid).to eq(mrID)
+      # expect(l.lineNo).to be(lineNo)
 
     end
-
   end
 end
 
