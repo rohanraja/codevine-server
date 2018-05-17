@@ -12,7 +12,7 @@ RSpec.describe CodeEventsWriterService do
       timeStamp = Time.now.utc.strftime("%d-%m-%Y %z")
       mr = MethodRun.create(:mrid => mrID)
 
-      subject.WriteLineExec(mrID, lineNo, timeStamp)
+      subject.LINE_EXEC(mrID, lineNo, timeStamp)
       
       l = LineRun.last
       expect(l.lineNo).to be(lineNo)

@@ -57,3 +57,4 @@ gem 'redis-namespace'
 
 gem 'resque'
 
+gem 'bootstrap-generators'

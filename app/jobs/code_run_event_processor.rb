@@ -7,13 +7,9 @@ class CodeRunEventProcessor
     payload = JSON.parse(payload)
 
     codeService = CodeEventsWriterService
-    if eventType == "LINE_EXEC"
-      codeService.HandleLineExec(codeRunId, payload)
-    end
 
-    if eventType == "METHOD_ENTER"
-      codeService.HandleMethodEnter(codeRunId, payload)
-    end
+    targetMethod = codeService.method(eventType)
+    targetMethod.call(*payload)
 
   end
 end
