@@ -16,6 +16,16 @@
     <%= form.text_field :mrid, id: :method_run_mrid %>
   </div>
 
+  <div class="field">
+    <%= form.label :relativeFilePath %>
+    <%= form.text_field :relativeFilePath, id: :method_run_relativeFilePath %>
+  </div>
+
+  <div class="field">
+    <%= form.label :methodName %>
+    <%= form.text_field :methodName, id: :method_run_methodName %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

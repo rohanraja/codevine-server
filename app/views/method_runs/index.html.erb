@@ -6,6 +6,8 @@
   <thead>
     <tr>
       <th>Mrid</th>
+      <th>Relativefilepath</th>
+      <th>Methodname</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,6 +16,8 @@
     <% @method_runs.each do |method_run| %>
       <tr>
         <td><%= method_run.mrid %></td>
+        <td><%= method_run.relativeFilePath %></td>
+        <td><%= method_run.methodName %></td>
         <td><%= link_to 'Show', method_run %></td>
         <td><%= link_to 'Edit', edit_method_run_path(method_run) %></td>
         <td><%= link_to 'Destroy', method_run, method: :delete, data: { confirm: 'Are you sure?' } %></td>

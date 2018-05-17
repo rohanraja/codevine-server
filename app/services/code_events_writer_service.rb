@@ -26,6 +26,6 @@ class CodeEventsWriterService
 
   def self.WriteMethodInfo(methodRunId, fPath, methodName)
 
-    m = MethodRun.create(:mrid => methodRunId)
+    m = MethodRun.create(:mrid => methodRunId, :relativeFilePath => fPath , :methodName => methodName)
   end
 end

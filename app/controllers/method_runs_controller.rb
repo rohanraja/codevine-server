@@ -69,6 +69,6 @@ class MethodRunsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def method_run_params
-      params.require(:method_run).permit(:mrid)
+      params.require(:method_run).permit(:mrid, :relativeFilePath, :methodName)
     end
 end

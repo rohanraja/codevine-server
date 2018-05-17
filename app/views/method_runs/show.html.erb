@@ -5,5 +5,15 @@
   <%= @method_run.mrid %>
 </p>
 
+<p>
+  <strong>Relativefilepath:</strong>
+  <%= @method_run.relativeFilePath %>
+</p>
+
+<p>
+  <strong>Methodname:</strong>
+  <%= @method_run.methodName %>
+</p>
+
 <%= link_to 'Edit', edit_method_run_path(@method_run) %> |
 <%= link_to 'Back', method_runs_path %>

@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe "method_runs/edit", type: :view do
   before(:each) do
     @method_run = assign(:method_run, MethodRun.create!(
-      :mrid => "MyString"
+      :mrid => "MyString",
+      :relativeFilePath => "MyString",
+      :methodName => "MyString"
     ))
   end
 
@@ -13,6 +15,10 @@ RSpec.describe "method_runs/edit", type: :view do
     assert_select "form[action=?][method=?]", method_run_path(@method_run), "post" do
 
       assert_select "input[name=?]", "method_run[mrid]"
+
+      assert_select "input[name=?]", "method_run[relativeFilePath]"
+
+      assert_select "input[name=?]", "method_run[methodName]"
     end
   end
 end
