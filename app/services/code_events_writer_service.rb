@@ -7,10 +7,12 @@ class CodeEventsWriterService
 
     m = MethodRun.GetByMRID(methodRunId)
     m.line_runs << l
+
   end
 
   def self.METHOD_ENTER(methodRunId, fPath, methodName)
 
     m = MethodRun.create(:mrid => methodRunId, :relativeFilePath => fPath , :methodName => methodName)
   end
+
 end
