@@ -58,3 +58,4 @@ gem 'redis-namespace'
 gem 'resque'
 
 gem 'bootstrap-generators'
+gem 'record_tag_helper', '~> 1.0'
