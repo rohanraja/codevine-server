@@ -7,7 +7,7 @@ class DataSelectorService
     methodRuns.each do |mr|
       fname = getFileName(mr)
       code = getCode(mr)
-      outP[fname] = code
+      outP[fname] = {:code => code}
     end
     return outP
   end

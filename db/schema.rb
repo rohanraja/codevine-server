@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 20180517231126) do
     t.string "mrid"
     t.string "relativeFilePath"
     t.string "methodName"
-    t.integer "source_file_info_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
