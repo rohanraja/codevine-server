@@ -13,7 +13,8 @@ class DataSelectorService
   end
 
   def getFileRuns
-    sortedLineRuns = LineRun.all
+    sortedLineRuns = LineRun.all.order(timeStamp: :asc)
+
     outP = []
     sortedLineRuns.each do |lr|
       
