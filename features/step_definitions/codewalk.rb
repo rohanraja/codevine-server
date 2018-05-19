@@ -32,12 +32,7 @@ def verifyForwardWalk(walkInfo)
 end
 
 Then("I perform forward walk test with id {string}") do |string|
-  walks = [
-    ["Program.cs", "Hello World!"],
-    ["Program.cs", "Test2"],
-    ["Program.cs", "GetNum"],
-    ["Program.cs", "int i"],
-  ]
+  walks = CodeVineTestCase.getCase(string).forwardWalk
   verifyForwardWalk(walks)
 end
 
