@@ -8,4 +8,5 @@ t1.forwardWalk = [
     ["Program.cs", "int j"],
     ["Program.cs", "GetMoreNum"],
   ]
+t1.proName = "test2"
 CodeVineTestCase.addCase("1", t1)

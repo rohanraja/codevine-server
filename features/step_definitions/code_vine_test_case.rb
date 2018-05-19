@@ -1,6 +1,7 @@
 class CodeVineTestCase
 
   attr_accessor :forwardWalk
+  attr_accessor :proName
   @@testCases = {}
 
   def self.getCase(id)
