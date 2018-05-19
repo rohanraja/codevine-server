@@ -8,10 +8,10 @@ RSpec.describe CodeRunEventProcessor do
     it 'creates a LineRun object and links to MethodRun' do
       mrID = "test_id"
       lineNo = 6
-      timeStamp = Time.now.utc.strftime("%d-%m-%Y %z")
+      tick = 20
       mr = MethodRun.create(:mrid => mrID)
 
-      payload = [mrID, lineNo, timeStamp]
+      payload = [mrID, lineNo, tick]
 
       subject.perform("", "LINE_EXEC", payload.to_json)
       
@@ -21,7 +21,7 @@ RSpec.describe CodeRunEventProcessor do
       l = mr.line_runs.first
       expect(l.lineNo).to be(lineNo)
 
-      expect(l.timeStamp.year).to be(Time.now.utc.year)
+      expect(l.timeStamp).to be(tick)
     end
   end
 

@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 20180517231126) do
 
   create_table "line_runs", force: :cascade do |t|
     t.integer "lineNo"
-    t.datetime "timeStamp"
+    t.integer "timeStamp"
     t.integer "method_run_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

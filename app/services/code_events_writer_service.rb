@@ -2,8 +2,7 @@ class CodeEventsWriterService
 
   def self.LINE_EXEC(methodRunId, lineNo, timeStamp)
 
-    parsedTime = Time.parse(timeStamp)
-    l = LineRun.create(:lineNo => lineNo, :timeStamp => parsedTime )
+    l = LineRun.create(:lineNo => lineNo, :timeStamp => timeStamp )
 
     m = MethodRun.GetByMRID(methodRunId)
     m.line_runs << l
