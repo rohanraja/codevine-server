@@ -17,6 +17,7 @@ def copyCsFilesFromFolderTo(from, to)
 end
 
 def createDotNetProject(projName)
+  puts `rm -rf #{projName}`
   puts `dotnet new console -o #{projName}`
 end
 
