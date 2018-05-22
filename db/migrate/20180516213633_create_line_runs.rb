@@ -4,7 +4,7 @@ class CreateLineRuns < ActiveRecord::Migration[5.1]
       t.integer :lineNo
       t.integer :timeStamp
       t.integer :method_run_id
-
+      t.string :methodRunningState, :default => "RUNNING"
       t.timestamps
     end
   end

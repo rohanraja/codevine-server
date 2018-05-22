@@ -1,8 +1,8 @@
 class CodeEventsWriterService
 
-  def self.LINE_EXEC(methodRunId, lineNo, timeStamp)
+  def self.LINE_EXEC(methodRunId, lineNo, timeStamp, methodRunningState="RUNNING")
 
-    l = LineRun.create(:lineNo => lineNo, :timeStamp => timeStamp )
+    l = LineRun.create(:lineNo => lineNo, :timeStamp => timeStamp, :methodRunningState => methodRunningState)
 
     m = MethodRun.GetByMRID(methodRunId)
     m.line_runs << l

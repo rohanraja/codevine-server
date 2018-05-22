@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20180517231126) do
     t.integer "lineNo"
     t.integer "timeStamp"
     t.integer "method_run_id"
+    t.string "methodRunningState", default: "RUNNING"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
