@@ -20,7 +20,9 @@ class DataSelectorService
       
       fname = getFileNameOfLineRun(lr)
       lineNo = lr.lineNo
-      outP << [fname, lineNo]
+      mrstate = lr.methodRunningState
+      methodName = getMethodName(lr)
+      outP << [fname, lineNo, mrstate, methodName]
 
     end
     return outP
@@ -34,6 +36,11 @@ class DataSelectorService
   def getFileName(methodRun)
 
     return methodRun.relativeFilePath
+  end
+
+  def getMethodName(lineRun)
+
+    return lineRun.method_run.methodName
   end
 
   def getCode(methodRun)
