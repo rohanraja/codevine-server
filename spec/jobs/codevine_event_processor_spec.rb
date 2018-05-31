@@ -30,8 +30,9 @@ RSpec.describe CodeRunEventProcessor do
       mrID = "test_id"
       fpath = "test_class"
       mName = "test_method"
+      tid = "998"
 
-      payload = [mrID, fpath, mName]
+      payload = [mrID, fpath, mName, tid]
 
       subject.perform("test_clr_id", "METHOD_ENTER", payload.to_json)
       
@@ -39,6 +40,7 @@ RSpec.describe CodeRunEventProcessor do
       expect(m.mrid).to eq(mrID)
       expect(m.relativeFilePath).to eq(fpath)
       expect(m.methodName).to eq(mName)
+      expect(m.threadid).to eq(tid)
 
     end
   end
