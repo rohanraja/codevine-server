@@ -1,6 +1,6 @@
 class CodeEventsWriterService
 
-  def self.LINE_EXEC(methodRunId, lineNo, timeStamp, methodRunningState="RUNNING")
+  def self.LINE_EXEC(methodRunId, lineNo, timeStamp, methodRunningState="RUNNING", threadId = "-1")
 
     l = LineRun.create(:lineNo => lineNo, :timeStamp => timeStamp, :methodRunningState => methodRunningState)
 
@@ -9,7 +9,7 @@ class CodeEventsWriterService
 
   end
 
-  def self.METHOD_ENTER(methodRunId, fPath, methodName)
+  def self.METHOD_ENTER(methodRunId, fPath, methodName, threadId = "-1")
 
     m = MethodRun.create(:mrid => methodRunId, :relativeFilePath => fPath , :methodName => methodName)
   end
