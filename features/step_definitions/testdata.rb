@@ -22,3 +22,13 @@ t2.forwardWalk = [
   ]
 t2.proName = "test_csharp"
 CodeVineTestCase.addCase("2", t2)
+
+t3 = CodeVineTestCase.new
+t3.forwardWalk = [
+    ["Program.cs", "ClassA"],
+    ["ClassA.cs", "ClassB"],
+    ["ClassB.cs", "pName"],
+    ["ClassA.cs", "Task.Run"],
+  ]
+t3.proName = "test_thread"
+CodeVineTestCase.addCase("3", t3)
