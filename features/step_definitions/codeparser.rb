@@ -1,6 +1,6 @@
 CODEVINE_PARSER_PROJECT_PATH = "/Users/rohan/code/codevine_parser/CodeVine_Parser/CodeVine_Parser/"
 Given("I run codevine parser on the project") do
-  puts `cd #{CODEVINE_PARSER_PROJECT_PATH}; dotnet run #{@projPath} #{@projName}.csproj`
+  puts `cd #{CODEVINE_PARSER_PROJECT_PATH}; dotnet run #{@projPath}/#{@projName}.csproj`
 end
 
 
