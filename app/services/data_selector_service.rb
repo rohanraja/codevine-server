@@ -24,10 +24,46 @@ class DataSelectorService
       methodName = getMethodName(lr)
       threadId = getThreadID(lr)
       outP << [fname, lineNo, mrstate, methodName, threadId]
-
     end
     return outP
   end
+
+  def getCodeStory
+    outP = {}
+
+    threadIds = getUniqueThreadIds()
+
+    threadIds.each do |thid|
+      outP[thid] = createThreadRun(thid)
+    end
+    return outP
+  end
+
+  def createThreadRun(thid)
+
+    sortedLineRuns = getLineRunsforThread(thid)
+    outP = []
+    sortedLineRuns.each do |lr|
+      
+      fname = getFileNameOfLineRun(lr)
+      lineNo = lr.lineNo
+      mrstate = lr.methodRunningState
+      methodName = getMethodName(lr)
+      threadId = getThreadID(lr)
+      outP << [fname, lineNo, mrstate, methodName, lr.timeStamp]
+    end
+    return outP
+
+  end
+
+  def getUniqueThreadIds()
+    MethodRun.select(:threadid).map(&:threadid).uniq
+  end
+
+  def getLineRunsforThread(thid)
+    LineRun.joins(:method_run).where(:method_runs => {:threadid => thid}).order(timeStamp: :asc)
+  end
+
 
   def getFileNameOfLineRun(lineRun)
 

@@ -4,19 +4,17 @@ class ApiController < ApplicationController
     ds = DataSelectorService.new
     cf = ds.getCodeFiles
     render :json => cf
-    # render :json => {
-    # "f1": {"code":"test line\ntest line2\ntestline4"}
-    # }
   end
 
   def fileruns
     ds = DataSelectorService.new
     cf = ds.getFileRuns
     render :json => cf
-    # render :json => [
-    #   ["f1", 0],
-    #   ["f1", 1],
-    #   ["f1", 2],
-    # ]
+  end
+
+  def codestory
+    ds = DataSelectorService.new
+    cf = ds.getCodeStory
+    render :json => cf
   end
 end
