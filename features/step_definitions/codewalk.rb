@@ -39,3 +39,18 @@ end
 Then("selected line should contain {string}") do |string|
   expect(GetSelectedLine()).to have_content(string)
 end
+
+Then("I run codewalk test on app with id {string}") do |idd|
+  steps %Q{
+    Given I create a dot net app with id "#{idd}"
+    And I clear database
+    And I run codevine parser on the project
+    And I run the project
+    And I wait for 5 seconds
+    When I visit the codewalk page
+    And I wait for 2 seconds
+    And I perform forward walk test with id "#{idd}"
+
+  }
+end
+

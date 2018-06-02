@@ -22,7 +22,8 @@ class DataSelectorService
       lineNo = lr.lineNo
       mrstate = lr.methodRunningState
       methodName = getMethodName(lr)
-      outP << [fname, lineNo, mrstate, methodName]
+      threadId = getThreadID(lr)
+      outP << [fname, lineNo, mrstate, methodName, threadId]
 
     end
     return outP
@@ -45,5 +46,9 @@ class DataSelectorService
 
   def getCode(methodRun)
     return methodRun.source_file_info.code
+  end
+
+  def getThreadID(lineRun)
+    return lineRun.method_run.threadid
   end
 end
