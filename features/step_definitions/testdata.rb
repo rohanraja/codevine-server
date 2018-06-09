@@ -16,6 +16,8 @@ t2.forwardWalk = [
     ["Program.cs", "ClassA"],
     ["ClassA.cs", "ClassB"],
     ["ClassB.cs", "pName"],
+    ["ClassB.cs", "}"],
+    ["ClassA.cs", "}"],
     ["Program.cs", "FROM MAIN"],
     ["Program.cs", "GetCount"],
     ["ClassA.cs", "return"],
@@ -28,6 +30,7 @@ t3.forwardWalk = [
     ["Program.cs", "ClassA"],
     ["ClassA.cs", "ClassB"],
     ["ClassB.cs", "pName"],
+    ["ClassB.cs", "}"],
     ["ClassA.cs", "Task.Run"],
   ]
 t3.proName = "test_thread"
