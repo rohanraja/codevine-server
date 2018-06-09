@@ -33,6 +33,22 @@ namespace TestCSharpProject
         {
             int cnt = GetCount();
             clsB.MethodB_1();
+            if(count == 0)
+            {
+              count = 15;
+              if(clsB != null)
+              {
+                clsB.MethodB_1();
+              }
+            }
+            else
+            {
+              count = 34;
+              if(clsB != null)
+              {
+                clsB.MethodB_1();
+              }
+            }
         }
 
         public void WaitForTask()
