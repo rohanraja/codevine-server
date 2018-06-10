@@ -1,0 +1,31 @@
+<div class="page-header">
+  <%= link_to new_var_instance_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Var instance
+  <% end %>
+  <h1>Listing var_instances</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @var_instances) do |var_instance| %>
+            <td><%= var_instance.name %></td>
+            <td><%= var_instance.type %></td>
+            <td><%= link_to 'Show', var_instance %></td>
+        <td><%= link_to 'Edit', edit_var_instance_path(var_instance) %></td>
+        <td><%= link_to 'Destroy', var_instance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>

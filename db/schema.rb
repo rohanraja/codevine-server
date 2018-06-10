@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180517231126) do
+ActiveRecord::Schema.define(version: 20180610103719) do
+
+  create_table "clr_class_instances", force: :cascade do |t|
+    t.string "instanceId"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "clrclass_vars", force: :cascade do |t|
+    t.integer "var_instance_id"
+    t.integer "clr_class_instance_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "line_runs", force: :cascade do |t|
     t.integer "lineNo"
@@ -34,6 +47,21 @@ ActiveRecord::Schema.define(version: 20180517231126) do
     t.integer "source_code_info_id"
     t.string "code"
     t.string "relativePath"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "value_holders", force: :cascade do |t|
+    t.string "rawValue"
+    t.string "timeStamp"
+    t.integer "var_instance_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "var_instances", force: :cascade do |t|
+    t.string "name"
+    t.string "vartype"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -21,6 +21,19 @@ class CodeEventsWriterService
 
   def self.SEND_FIELD_UPDATE(clrInstanceId, varName, varType, newValue, timeStamp)
 
+    clr = ClrClassInstance.where(:instanceId => clrInstanceId).first
+    if clr == nil
+      clr = ClrClassInstance.create(:instanceId => clrInstanceId)
+    end
+
+    varInst = clr.var_instances.where(:name => varName).first
+    if varInst == nil
+      varInst = VarInstance.create(:name => varName, :vartype => varType)
+      clr.var_instances << varInst
+    end
+
+    varInst.value_holders.create(:rawValue => newValue, :timeStamp => timeStamp)
+
   end
 
 end

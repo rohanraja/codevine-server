@@ -1,0 +1,29 @@
+<div class="page-header">
+  <%= link_to new_clr_class_instance_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Clr class instance
+  <% end %>
+  <h1>Listing clr_class_instances</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>Instanceid</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @clr_class_instances) do |clr_class_instance| %>
+            <td><%= clr_class_instance.instanceId %></td>
+            <td><%= link_to 'Show', clr_class_instance %></td>
+        <td><%= link_to 'Edit', edit_clr_class_instance_path(clr_class_instance) %></td>
+        <td><%= link_to 'Destroy', clr_class_instance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>

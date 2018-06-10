@@ -1,0 +1,31 @@
+<div class="page-header">
+  <%= link_to new_value_holder_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Value holder
+  <% end %>
+  <h1>Listing value_holders</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>Rawvalue</th>
+            <th>Timestamp</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @value_holders) do |value_holder| %>
+            <td><%= value_holder.rawValue %></td>
+            <td><%= value_holder.timeStamp %></td>
+            <td><%= link_to 'Show', value_holder %></td>
+        <td><%= link_to 'Edit', edit_value_holder_path(value_holder) %></td>
+        <td><%= link_to 'Destroy', value_holder, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>

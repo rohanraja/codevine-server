@@ -1,6 +1,9 @@
 require 'resque/server'
 
 Rails.application.routes.draw do
+  resources :value_holders
+  resources :var_instances
+  resources :clr_class_instances
   resources :source_file_infos
   get 'api/codefiles'
 
