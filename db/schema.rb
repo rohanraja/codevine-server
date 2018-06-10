@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 20180610103719) do
 
   create_table "clr_class_instances", force: :cascade do |t|
     t.string "instanceId"
+    t.string "className"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -53,7 +54,7 @@ ActiveRecord::Schema.define(version: 20180610103719) do
 
   create_table "value_holders", force: :cascade do |t|
     t.string "rawValue"
-    t.string "timeStamp"
+    t.integer "timeStamp"
     t.integer "var_instance_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

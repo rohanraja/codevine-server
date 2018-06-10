@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   get 'api/codestory'
 
+  get 'api/framevars'
+
   resources :line_runs
   resources :method_runs
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

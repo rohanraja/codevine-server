@@ -43,6 +43,30 @@ RSpec.describe ApiController, type: :controller do
     end
   end
 
+  describe "GET #framevars" do
+    it "returns http success" do
+
+      classId = "class1"
+      name = "totalCount"
+      type = "raw"
+      clsName = "TestClass"
+      newValue = "99"
+      timeStamp = "20"
+      payload = [classId, name, type, clsName, newValue, timeStamp]
+
+      CodeRunEventProcessor.perform("test_clr_id", "SEND_FIELD_UPDATE", payload.to_json)
+
+      get :framevars
+
+      expect(response.body).to include(name)
+      expect(response.body).to include(clsName)
+      expect(response.body).to include(newValue)
+      expect(response.body).to include(timeStamp)
+      puts response.body
+
+    end
+  end
+
   describe "GET #fileruns" do
     it "returns http success" do
       path = "testpath"

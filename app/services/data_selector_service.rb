@@ -39,6 +39,56 @@ class DataSelectorService
     return outP
   end
 
+  def getVarStateAtTime(var, timeKey)
+    sortedVals = var.value_holders.order(timeStamp: :desc)
+    if sortedVals.count == 0
+      return "null"
+    end
+    if sortedVals.last.timeStamp < timeKey
+      return "null"
+    end
+
+    sortedVals.each do |vh|
+      if vh.timeStamp <= timeKey
+        return vh.rawValue
+      end
+    end
+    return "null"
+  end
+
+  def getClassStateAtTime(clr, timeKey)
+    outP = {}
+    clr.var_instances.each do |var|
+      outP[var.name] = getVarStateAtTime(var, timeKey)
+    end
+    return outP
+  end
+
+  def getStateAtTime(timeKey)
+    outP = {}
+
+    clrs = ClrClassInstance.all
+
+    clrs.each do |clr|
+      outP[clr.className] = getClassStateAtTime(clr, timeKey)
+    end
+    return outP
+  end
+
+  def getFrameVars
+    outP = {}
+    timeStamps = getAllTimeStamps()
+    timeStamps.each do |timekey|
+      curState = getStateAtTime(timekey)
+      outP[timekey] = curState
+    end
+    return outP
+  end
+
+  def getAllTimeStamps()
+    ValueHolder.select(:timeStamp).map(&:timeStamp).uniq
+  end
+
   def createThreadRun(thid)
 
     sortedLineRuns = getLineRunsforThread(thid)
