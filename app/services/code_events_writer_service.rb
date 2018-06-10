@@ -19,4 +19,8 @@ class CodeEventsWriterService
     s = SourceFileInfo.create(:relativePath => fPath, :code => code)
   end
 
+  def self.SEND_FIELD_UPDATE(clrInstanceId, varName, varType, newValue, timeStamp)
+
+  end
+
 end

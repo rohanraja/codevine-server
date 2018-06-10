@@ -61,6 +61,49 @@ RSpec.describe CodeRunEventProcessor do
 
     end
   end
+
+  describe 'Class Instance Field Update Message' do
+    classId = "class1"
+    name = "totalCount"
+    type = "raw"
+    newValue = "99"
+    timeStamp = "20"
+    payload = [classId, name, type, newValue, timeStamp]
+    
+    def performCheck
+      clr = ClrClassInstance.last
+      expect(clr.instanceId).to eq(classId)
+      expect(clr.var_instances.count).to be >= 0
+
+      fi = clr.var_instances.last
+      expect(fi.name).to eq(name)
+      expect(fi.type).to eq(type)
+
+      val = fi.value_holders.last
+      expect(val.rawValue).to eq(newValue)
+      expect(val.timeStamp).to eq(timeStamp)
+    end
+
+    it 'adds a value checkpoint to a field of a non existing class instance' do
+      
+      subject.perform("test_clr_id", "SEND_FIELD_UPDATE", payload.to_json)
+      performCheck()
+
+    end
+
+
+    it 'adds a value checkpoint to a field of an existing class instance but non existing field' do
+
+      ClrClassInstance.create(:instanceId => classId)
+      subject.perform("test_clr_id", "SEND_FIELD_UPDATE", payload.to_json)
+      performCheck()
+
+    end
+
+    it 'adds a value checkpoint to a field of an existing class instance and existing field' do
+      subject.perform("test_clr_id", "SEND_FIELD_UPDATE", payload.to_json)
+    end
+  end
 end
 
 
