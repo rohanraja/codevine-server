@@ -44,7 +44,7 @@ class DataSelectorService
     if sortedVals.count == 0
       return "null"
     end
-    if sortedVals.last.timeStamp < timeKey
+    if sortedVals.last.timeStamp > timeKey
       return "null"
     end
 
@@ -78,6 +78,7 @@ class DataSelectorService
   def getFrameVars
     outP = {}
     timeStamps = getAllTimeStamps()
+    timeStamps.insert(0,0)
     timeStamps.each do |timekey|
       curState = getStateAtTime(timekey)
       outP[timekey] = curState
