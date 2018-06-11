@@ -30,6 +30,10 @@ class CodeEventsWriterService
     if varInst == nil
       varInst = VarInstance.create(:name => varName, :vartype => varType)
       clr.var_instances << varInst
+    else
+      if varInst.vartype == "NULL"
+        varInst.update(:vartype => varType)
+      end
     end
 
     varInst.value_holders.create(:rawValue => newValue, :timeStamp => timeStamp)
