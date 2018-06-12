@@ -52,9 +52,9 @@ RSpec.describe ApiController, type: :controller do
       clsName = "TestClass"
       newValue = "99"
       timeStamp = "20"
-      payload = [classId, name, type, clsName, newValue, timeStamp]
+      payload = [classId, name, type, clsName, newValue, timeStamp, false]
 
-      CodeRunEventProcessor.perform("test_clr_id", "SEND_FIELD_UPDATE", payload.to_json)
+      CodeRunEventProcessor.perform("test_clr_id", "SEND_VAR_UPDATE", payload.to_json)
 
       get :framevars
 
