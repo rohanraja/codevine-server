@@ -23,6 +23,9 @@ class CodeEventsWriterService
 
     if isLocal == "true" || isLocal == "True"
       clr = MethodRun.where(:mrid => clrInstanceId).first
+      if clr == nil
+        clr = MethodRun.create(:mrid => clrInstanceId)
+      end
     else
 
       clr = ClrClassInstance.where(:instanceId => clrInstanceId).first

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180610103719) do
+ActiveRecord::Schema.define(version: 20180612030508) do
 
   create_table "clr_class_instances", force: :cascade do |t|
     t.string "instanceId"
@@ -40,6 +40,13 @@ ActiveRecord::Schema.define(version: 20180610103719) do
     t.string "relativeFilePath"
     t.string "methodName"
     t.string "threadid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "methodrun_vars", force: :cascade do |t|
+    t.integer "var_instance_id"
+    t.integer "method_run_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

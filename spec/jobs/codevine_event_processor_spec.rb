@@ -69,7 +69,7 @@ RSpec.describe CodeRunEventProcessor do
     clsName = "TestClass"
     newValue = "99"
     timeStamp = 20
-    payload = [classId, name, type, clsName, newValue, timeStamp]
+    payload = [classId, name, type, clsName, newValue, timeStamp, "False"]
 
     after(:each) do
       clr = ClrClassInstance.last
@@ -88,23 +88,53 @@ RSpec.describe CodeRunEventProcessor do
     end
 
     it 'adds a value checkpoint to a field of a non existing class instance' do
-      subject.perform("test_clr_id", "SEND_FIELD_UPDATE", payload.to_json)
+      subject.perform("test_clr_id", "SEND_VAR_UPDATE", payload.to_json)
     end
 
 
     it 'adds a value checkpoint to a field of an existing class instance but non existing field' do
 
       ClrClassInstance.create(:instanceId => classId, :className=> clsName)
-      subject.perform("test_clr_id", "SEND_FIELD_UPDATE", payload.to_json)
+      subject.perform("test_clr_id", "SEND_VAR_UPDATE", payload.to_json)
     end
 
     it 'adds a value checkpoint to a field of an existing class instance and existing field' do
       clr = ClrClassInstance.create(:instanceId => classId, :className=> clsName)
       clr.var_instances.create(:name =>name, :vartype => type)
-      subject.perform("test_clr_id", "SEND_FIELD_UPDATE", payload.to_json)
+      subject.perform("test_clr_id", "SEND_VAR_UPDATE", payload.to_json)
     end
 
   end
+
+  describe 'Local Var Update Message' do
+    classId = "class1"
+    name = "totalCount"
+    type = "raw"
+    clsName = "TestClass"
+    newValue = "99"
+    timeStamp = 20
+    payload = [classId, name, type, clsName, newValue, timeStamp, "True"]
+
+    after(:each) do
+      clr = MethodRun.last
+      expect(clr.mrid).to eq(classId)
+      expect(clr.var_instances.count).to be > 0
+
+      fi = clr.var_instances.last
+      expect(fi.name).to eq(name)
+      expect(fi.vartype).to eq(type)
+
+      val = fi.value_holders.last
+      expect(val.rawValue).to eq(newValue)
+      expect(val.timeStamp).to eq(timeStamp)
+
+    end
+
+    it 'adds a value checkpoint to a field of a non existing class instance' do
+      subject.perform("test_clr_id", "SEND_VAR_UPDATE", payload.to_json)
+    end
+  end
+
 end
 
 
