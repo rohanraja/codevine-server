@@ -126,8 +126,24 @@ class DataSelectorService
     clrs = ClrClassInstance.all
 
     clrs.each do |clr|
-      outP[clr.className] = getClassStateAtTime(clr, timeKey)
+      clsVal = getClassStateAtTime(clr, timeKey)
+      outP[clr.id] = clsVal
     end
+    return outP
+  end
+
+  def getAllLocalVarsAtTime(timeKey)
+    outP = {}
+    
+    MethodRun.all.each do |mr|
+      mr.var_instances.each do |var|
+        varInfo = {}
+        varInfo["name"] = var.name
+        varInfo["value"] = getVarStateAtTime(var, timeKey)
+        outP[var.id] = varInfo
+      end
+    end
+
     return outP
   end
 
@@ -136,8 +152,10 @@ class DataSelectorService
     timeStamps = getAllTimeStamps()
     timeStamps.insert(0,0)
     timeStamps.each do |timekey|
-      curState = getStateAtTime(timekey)
-      outP[timekey] = curState
+      allClasses = getStateAtTime(timekey)
+      allVars = getAllLocalVarsAtTime(timekey)
+
+      outP[timekey] = {:classes => allClasses, :localvars => allVars}
     end
     return outP
   end

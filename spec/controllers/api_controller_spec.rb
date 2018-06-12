@@ -59,7 +59,6 @@ RSpec.describe ApiController, type: :controller do
       get :framevars
 
       expect(response.body).to include(name)
-      expect(response.body).to include(clsName)
       expect(response.body).to include(newValue)
       expect(response.body).to include(timeStamp)
       puts response.body
