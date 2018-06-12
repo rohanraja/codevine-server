@@ -157,7 +157,7 @@ class DataSelectorService
       mrstate = lr.methodRunningState
       methodName = getMethodName(lr)
       threadId = getThreadID(lr)
-      outP << [fname, lineNo, mrstate, methodName, lr.timeStamp]
+      outP << [fname, lineNo, mrstate, methodName, lr.timeStamp, lr.method_run.id]
     end
     return outP
 
