@@ -39,6 +39,41 @@ class DataSelectorService
     return outP
   end
 
+
+
+  def getExternalClassVal(vh)
+    JSON.parse(vh.rawValue) 
+  end
+
+  def getInternalClassVal(vh, timeKey)
+    clr = ClrClassInstance.where(:instanceId => vh.rawValue).first
+    if clr == nil
+      return "clrInstance ##{vh.rawValue}"
+    end
+    return getClassStateAtTime(clr, timeKey)
+  end
+
+  def getVal(var, vh, timeKey)
+    if var.vartype == "NULL"
+      return "null"
+    end
+
+    if var.vartype == "VALUE"
+      return vh.rawValue 
+    end
+
+    if var.vartype == "EXTERNAL_CLASS"
+      return getExternalClassVal(vh)    
+    end
+
+    if var.vartype == "INTERNAL_CLASS"
+      return getInternalClassVal(vh, timeKey)    
+    end
+
+    return vh.rawValue 
+  end
+
+
   def getVarStateAtTime(var, timeKey)
     sortedVals = var.value_holders.order(timeStamp: :desc)
     if sortedVals.count == 0
@@ -50,16 +85,37 @@ class DataSelectorService
 
     sortedVals.each do |vh|
       if vh.timeStamp <= timeKey
-        return vh.rawValue
+        return getVal(var, vh, timeKey)
       end
     end
     return "null"
   end
 
+  def getClassName(var)
+    if var.vartype != "INTERNAL_CLASS"
+      return ""
+    end
+    vh = var.value_holders.order(timeStamp: :desc).first
+    if vh == nil
+      return ""
+    end
+    clr = ClrClassInstance.where(:instanceId => vh.rawValue).first
+    if clr == nil
+      return ""
+    end
+    return clr.className
+  end
+
   def getClassStateAtTime(clr, timeKey)
     outP = {}
     clr.var_instances.each do |var|
-      outP[var.name] = getVarStateAtTime(var, timeKey)
+      varKey = var.name
+      clsName = getClassName(var)
+      if clsName != ""
+        varKey = "#{varKey} (#{clsName})"
+      end
+      varVal = getVarStateAtTime(var, timeKey)
+      outP[varKey] = varVal
     end
     return outP
   end
