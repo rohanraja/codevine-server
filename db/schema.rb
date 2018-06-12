@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20180612030508) do
     t.string "relativeFilePath"
     t.string "methodName"
     t.string "threadid"
+    t.integer "clr_class_instance_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,6 +1,8 @@
 class MethodRun < ApplicationRecord
   has_many :line_runs
 
+  has_one :clr_class_instance
+
   has_many :methodrun_vars
   has_many :var_instances, :through => :methodrun_vars
 

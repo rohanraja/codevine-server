@@ -9,9 +9,19 @@ class CodeEventsWriterService
 
   end
 
-  def self.METHOD_ENTER(methodRunId, fPath, methodName, threadId = "-1")
+  def self.METHOD_ENTER(methodRunId, fPath, methodName, threadId = "-1", clrInstanceId="1")
 
-    m = MethodRun.create(:mrid => methodRunId, :relativeFilePath => fPath , :methodName => methodName, :threadid => threadId)
+    clr = ClrClassInstance.where(:instanceId => clrInstanceId).first
+    if clr == nil
+        clr = ClrClassInstance.create(:instanceId => clrInstanceId)
+    end
+
+    m = MethodRun.create(:mrid => methodRunId, 
+                         :relativeFilePath => fPath , 
+                         :methodName => methodName, 
+                         :threadid => threadId,
+                         :clr_class_instance_id => clr.id
+                        )
   end
 
   def self.ADD_SOURCE_FILE(fPath, code)
@@ -31,6 +41,10 @@ class CodeEventsWriterService
       clr = ClrClassInstance.where(:instanceId => clrInstanceId).first
       if clr == nil
         clr = ClrClassInstance.create(:instanceId => clrInstanceId, :className => className)
+      else
+        if clr.className == nil || clr.className == ""
+          clr.update(:className => className)
+        end
       end
     end
 
