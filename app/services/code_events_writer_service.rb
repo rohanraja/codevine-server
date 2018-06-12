@@ -19,11 +19,16 @@ class CodeEventsWriterService
     s = SourceFileInfo.create(:relativePath => fPath, :code => code)
   end
 
-  def self.SEND_FIELD_UPDATE(clrInstanceId, varName, varType, className, newValue, timeStamp)
+  def self.SEND_VAR_UPDATE(clrInstanceId, varName, varType, className, newValue, timeStamp, isLocal)
 
-    clr = ClrClassInstance.where(:instanceId => clrInstanceId).first
-    if clr == nil
-      clr = ClrClassInstance.create(:instanceId => clrInstanceId, :className => className)
+    if isLocal == "true" || isLocal == "True"
+      clr = MethodRun.where(:mrid => clrInstanceId).first
+    else
+
+      clr = ClrClassInstance.where(:instanceId => clrInstanceId).first
+      if clr == nil
+        clr = ClrClassInstance.create(:instanceId => clrInstanceId, :className => className)
+      end
     end
 
     varInst = clr.var_instances.where(:name => varName).first
