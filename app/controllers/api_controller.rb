@@ -23,4 +23,10 @@ class ApiController < ApplicationController
     cf = ds.getFrameVars
     render :json => cf
   end
+
+  def scopeVars
+    ds = DataSelectorService.new
+    cf = ds.scopeVars
+    render :json => cf
+  end
 end

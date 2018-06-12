@@ -163,6 +163,23 @@ class DataSelectorService
 
   end
 
+  def scopeVars
+    outP = {}
+    
+    MethodRun.all.each do |mr|
+      mrinfo = {}
+      mrinfo["this"] = mr.clr_class_instance_id
+      mrinfo["locals"] = getLocalVarIdList(mr)
+      outP[mr.id] = mrinfo
+    end
+
+    return outP
+  end
+
+  def getLocalVarIdList(mr)
+    mr.var_instances.map(&:id) 
+  end
+
   def getUniqueThreadIds()
     MethodRun.select(:threadid).map(&:threadid).uniq
   end

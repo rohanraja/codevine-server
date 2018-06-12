@@ -67,20 +67,27 @@ RSpec.describe ApiController, type: :controller do
     end
   end
 
-  describe "GET #fileruns" do
+  describe "GET #scopeVars" do
     it "returns http success" do
-      path = "testpath"
-      lno = 5
-      mr = MethodRun.create(:relativeFilePath => path)
-      mr.line_runs.create(:lineNo => lno, :timeStamp => Time.now)
 
-      get :fileruns
+      clr = ClrClassInstance.create(:instanceId => "class1")
+      mr = MethodRun.create(:mrid => "mr1", :clr_class_instance_id => clr.id)
 
-      expect(response).to have_http_status(:success)
-      expect(response.body).to include(path)
-      expect(response.body).to include(lno.to_s)
+      payload = ["class1", "field1", "VALUE", "TestClass", "99", 5, "false"]
+      CodeRunEventProcessor.perform("test_clr_id", "SEND_VAR_UPDATE", payload.to_json)
 
+      payload = ["mr1", "localVar1", "VALUE", "TestClass", "200", 10, "true"]
+      CodeRunEventProcessor.perform("test_clr_id", "SEND_VAR_UPDATE", payload.to_json)
+
+      get :scopeVars
+
+      
+      expect(response.body).to include(mr.id.to_s)
+      expect(response.body).to include("locals")
+      expect(response.body).to include("this")
+      expect(response.body).to include(VarInstance.last.id.to_s)
       puts response.body
+
     end
   end
 
